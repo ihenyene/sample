@@ -1,0 +1,48 @@
+<def-group>
+  <definition class="compliance" id="mount_option_boot_efi_nosuid" version="2">
+    <metadata>
+        <title>Add nosuid Option to /boot/efi</title>
+        
+    <affected family="unix">
+    <platform>Red Hat Enterprise Linux 8</platform>
+    </affected>
+        <description>/boot/efi should be mounted with mount option nosuid.</description>
+    </metadata>
+    <criteria operator="OR">
+      <criterion comment="nosuid on /boot/efi"
+        test_ref="test_boot_efi_partition_nosuid_optional_no"/>
+    
+      <criterion comment="/boot/efi does not exist"
+        test_ref="test_boot_efi_no_partition_nosuid_optional_no"
+        negate="true" />
+    
+    </criteria>
+  </definition>
+
+  <linux:partition_object version="1"
+    id="object_boot_efi_partition_nosuid_optional_no">
+    <linux:mount_point>/boot/efi</linux:mount_point>
+  </linux:partition_object>
+
+  <linux:partition_state version="1"
+    id="state_boot_efi_partition_nosuid_optional_no">
+
+    <linux:mount_options datatype="string" entity_check="at least one" operation="equals">nosuid</linux:mount_options>
+  </linux:partition_state>
+
+
+  <linux:partition_test check="all" check_existence="all_exist" version="2"
+    comment="nosuid on /boot/efi optional no"
+    id="test_boot_efi_partition_nosuid_optional_no">
+    <linux:object object_ref="object_boot_efi_partition_nosuid_optional_no"/>
+    <linux:state state_ref="state_boot_efi_partition_nosuid_optional_no"/>
+  </linux:partition_test>
+
+  
+  <linux:partition_test check="all" check_existence="all_exist" version="1"
+    comment="/boot/efi exists"
+    id="test_boot_efi_no_partition_nosuid_optional_no">
+    <linux:object object_ref="object_boot_efi_partition_nosuid_optional_no"/>
+  </linux:partition_test>
+  
+</def-group>

@@ -1,0 +1,38 @@
+<def-group>
+  <definition class="compliance" id="mount_option_tmp_nodev" version="2">
+    <metadata>
+        <title>Add nodev Option to /tmp</title>
+        
+    <affected family="unix">
+    <platform>Red Hat Enterprise Linux 8</platform>
+    </affected>
+        <description>/tmp should be mounted with mount option nodev.</description>
+    </metadata>
+    <criteria operator="OR">
+      <criterion comment="nodev on /tmp"
+        test_ref="test_tmp_partition_nodev_optional_yes"/>
+    
+    </criteria>
+  </definition>
+
+  <linux:partition_object version="1"
+    id="object_tmp_partition_nodev_optional_yes">
+    <linux:mount_point>/tmp</linux:mount_point>
+  </linux:partition_object>
+
+  <linux:partition_state version="1"
+    id="state_tmp_partition_nodev_optional_yes">
+
+    <linux:mount_options datatype="string" entity_check="at least one" operation="equals">nodev</linux:mount_options>
+  </linux:partition_state>
+
+
+  <linux:partition_test check="all" check_existence="all_exist" version="2"
+    comment="nodev on /tmp optional yes"
+    id="test_tmp_partition_nodev_optional_yes">
+    <linux:object object_ref="object_tmp_partition_nodev_optional_yes"/>
+    <linux:state state_ref="state_tmp_partition_nodev_optional_yes"/>
+  </linux:partition_test>
+
+  
+</def-group>

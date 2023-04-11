@@ -1,0 +1,29 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service portreserve
+  block:
+  - name: Disable service portreserve
+    systemd:
+      name: "portreserve.service"
+      enabled: "no"
+      state: "stopped"
+      masked: "yes"
+    ignore_errors: 'yes'
+
+- name: "Unit Socket Exists - portreserve.socket"
+  command: systemctl list-unit-files portreserve.socket
+  register: socket_file_exists
+  changed_when: False
+  ignore_errors: True
+  check_mode: False
+
+- name: Disable socket portreserve
+  systemd:
+    name: "portreserve.socket"
+    enabled: "no"
+    state: "stopped"
+    masked: "yes"
+  when: '"portreserve.socket" in socket_file_exists.stdout_lines[1]'

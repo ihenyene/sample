@@ -1,0 +1,9 @@
+name: s390x_arch
+original_expression: s390x_arch
+xml_content: <ns0:platform xmlns:ns0="http://cpe.mitre.org/language/2.0" id="s390x_arch"><ns0:logical-test
+    operator="AND" negate="false"><ns0:fact-ref name="cpe:/a:s390x_arch" /></ns0:logical-test></ns0:platform>
+bash_conditional: grep -q s390x /proc/sys/kernel/osrelease
+ansible_conditional: ansible_architecture == "s390x"
+title: ''
+definition_location: /root/scap-formula/build/content/build/ol8/platforms/s390x_arch.yml
+documentation_complete: true

@@ -1,0 +1,61 @@
+<def-group>
+  <definition class="compliance" id="mount_option_proc_hidepid" version="2">
+    <metadata>
+        <title>Add hidepid Option to /proc</title>
+        
+    <affected family="unix">
+    <platform>Red Hat Enterprise Linux 8</platform>
+    </affected>
+        <description>/proc should be mounted with mount option hidepid.</description>
+    </metadata>
+    <criteria operator="OR">
+      <criterion comment="hidepid on /proc"
+        test_ref="test_proc_partition_hidepid_optional_no"/>
+    
+      <criterion comment="/proc does not exist"
+        test_ref="test_proc_no_partition_hidepid_optional_no"
+        negate="true" />
+    
+    </criteria>
+  </definition>
+
+  <linux:partition_object version="1"
+    id="object_proc_partition_hidepid_optional_no">
+    <linux:mount_point>/proc</linux:mount_point>
+  </linux:partition_object>
+
+  <linux:partition_state version="1"
+    id="state_proc_partition_hidepid_optional_no">
+
+    <linux:mount_options datatype="string" entity_check="at least one" operation="equals"
+      var_ref="local_var_mountoption_hidepid_with_value"/>
+  </linux:partition_state>
+
+  <external_variable datatype="string" id="var_mount_option_proc_hidepid" version="1"
+                     comment="Variable defining the value the argument should have"/>
+
+  <local_variable id="local_var_mountoption_hidepid_with_value"
+    comment="Value used in hidepid option as defined in var_mount_option_proc_hidepid variable"
+    datatype="string" version="1">
+    <concat>
+      <literal_component>hidepid=</literal_component>
+      <variable_component var_ref="var_mount_option_proc_hidepid"/>
+    </concat>
+  </local_variable>
+
+
+  <linux:partition_test check="all" check_existence="all_exist" version="2"
+    comment="hidepid on /proc optional no"
+    id="test_proc_partition_hidepid_optional_no">
+    <linux:object object_ref="object_proc_partition_hidepid_optional_no"/>
+    <linux:state state_ref="state_proc_partition_hidepid_optional_no"/>
+  </linux:partition_test>
+
+  
+  <linux:partition_test check="all" check_existence="all_exist" version="1"
+    comment="/proc exists"
+    id="test_proc_no_partition_hidepid_optional_no">
+    <linux:object object_ref="object_proc_partition_hidepid_optional_no"/>
+  </linux:partition_test>
+  
+</def-group>

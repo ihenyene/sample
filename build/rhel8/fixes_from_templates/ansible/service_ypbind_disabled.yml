@@ -1,0 +1,29 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service ypbind
+  block:
+  - name: Disable service ypbind
+    systemd:
+      name: "ypbind.service"
+      enabled: "no"
+      state: "stopped"
+      masked: "yes"
+    ignore_errors: 'yes'
+
+- name: "Unit Socket Exists - ypbind.socket"
+  command: systemctl list-unit-files ypbind.socket
+  register: socket_file_exists
+  changed_when: False
+  ignore_errors: True
+  check_mode: False
+
+- name: Disable socket ypbind
+  systemd:
+    name: "ypbind.socket"
+    enabled: "no"
+    state: "stopped"
+    masked: "yes"
+  when: '"ypbind.socket" in socket_file_exists.stdout_lines[1]'

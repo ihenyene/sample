@@ -1,0 +1,29 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service cgred
+  block:
+  - name: Disable service cgred
+    systemd:
+      name: "cgred.service"
+      enabled: "no"
+      state: "stopped"
+      masked: "yes"
+    ignore_errors: 'yes'
+
+- name: "Unit Socket Exists - cgred.socket"
+  command: systemctl list-unit-files cgred.socket
+  register: socket_file_exists
+  changed_when: False
+  ignore_errors: True
+  check_mode: False
+
+- name: Disable socket cgred
+  systemd:
+    name: "cgred.socket"
+    enabled: "no"
+    state: "stopped"
+    masked: "yes"
+  when: '"cgred.socket" in socket_file_exists.stdout_lines[1]'

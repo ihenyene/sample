@@ -1,0 +1,11 @@
+name: not_rhel_equals_9_0_and_rhel_greater_equal_8_7
+original_expression: rhel_greater_equal_8_7 and not rhel_equals_9_0
+xml_content: <ns0:platform xmlns:ns0="http://cpe.mitre.org/language/2.0" id="not_rhel_equals_9_0_and_rhel_greater_equal_8_7"><ns0:logical-test
+    operator="AND" negate="false"><ns0:logical-test operator="AND" negate="true"><ns0:fact-ref
+    name="cpe:/o:rhel:eq:9:0" /></ns0:logical-test><ns0:fact-ref name="cpe:/o:rhel:ge:8:7"
+    /></ns0:logical-test></ns0:platform>
+bash_conditional: ''
+ansible_conditional: ''
+title: ''
+definition_location: /root/scap-formula/build/content/build/rhel8/platforms/not_rhel_equals_9_0_and_rhel_greater_equal_8_7.yml
+documentation_complete: true

@@ -1,0 +1,11 @@
+name: cpe:/a:login_defs
+check_id: installed_env_has_login_defs
+bash_conditional: rpm --quiet -q shadow-utils
+ansible_conditional: '"shadow-utils" in ansible_facts.packages'
+is_product_cpe: false
+versioned: false
+args: {}
+title: Package providing /etc/login.defs is installed
+definition_location: /root/scap-formula/build/content/shared/applicability/login_defs.yml
+template: null
+documentation_complete: true

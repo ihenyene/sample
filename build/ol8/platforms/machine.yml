@@ -1,0 +1,10 @@
+name: machine
+original_expression: machine
+xml_content: <ns0:platform xmlns:ns0="http://cpe.mitre.org/language/2.0" id="machine"><ns0:logical-test
+    operator="AND" negate="false"><ns0:fact-ref name="cpe:/a:machine" /></ns0:logical-test></ns0:platform>
+bash_conditional: '[ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]'
+ansible_conditional: ansible_virtualization_type not in ["docker", "lxc", "openvz",
+    "podman", "container"]
+title: ''
+definition_location: /root/scap-formula/build/content/build/ol8/platforms/machine.yml
+documentation_complete: true

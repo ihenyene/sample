@@ -1,0 +1,10 @@
+name: non-uefi
+original_expression: non-uefi
+xml_content: <ns0:platform xmlns:ns0="http://cpe.mitre.org/language/2.0" id="non-uefi"><ns0:logical-test
+    operator="AND" negate="false"><ns0:fact-ref name="cpe:/a:non-uefi" /></ns0:logical-test></ns0:platform>
+bash_conditional: '[ ! -f /sys/firmware/efi ]'
+ansible_conditional: '"/boot/efi" not in ansible_mounts | map(attribute="mount") |
+    list'
+title: ''
+definition_location: /root/scap-formula/build/content/build/rhel7/platforms/non-uefi.yml
+documentation_complete: true

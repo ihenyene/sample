@@ -1,0 +1,11 @@
+name: cpe:/a:partition-tmp
+check_id: installed_env_mounts_tmp
+bash_conditional: findmnt --kernel "/tmp" > /dev/null
+ansible_conditional: '"/tmp" in ansible_mounts | map(attribute="mount") | list'
+is_product_cpe: false
+versioned: false
+args: {}
+title: There is a /tmp partition
+definition_location: /root/scap-formula/build/content/shared/applicability/partition-tmp.yml
+template: null
+documentation_complete: true

@@ -1,0 +1,29 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service rsh
+  block:
+  - name: Disable service rsh
+    systemd:
+      name: "rsh.service"
+      enabled: "no"
+      state: "stopped"
+      masked: "yes"
+    ignore_errors: 'yes'
+
+- name: "Unit Socket Exists - rsh.socket"
+  command: systemctl list-unit-files rsh.socket
+  register: socket_file_exists
+  changed_when: False
+  ignore_errors: True
+  check_mode: False
+
+- name: Disable socket rsh
+  systemd:
+    name: "rsh.socket"
+    enabled: "no"
+    state: "stopped"
+    masked: "yes"
+  when: '"rsh.socket" in socket_file_exists.stdout_lines[1]'

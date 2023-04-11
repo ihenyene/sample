@@ -1,0 +1,11 @@
+name: cpe:/o:rhel:ge:8:7
+check_id: rhel8_greater_equal_8_7
+bash_conditional: ''
+ansible_conditional: ''
+is_product_cpe: false
+versioned: false
+args: {}
+title: Operating System is RHEL and version is greater than or equal to 8.7
+definition_location: /root/scap-formula/build/content/shared/applicability/rhel_greater_equal_8_7.yml
+template: null
+documentation_complete: true

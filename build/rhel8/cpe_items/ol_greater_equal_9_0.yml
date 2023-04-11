@@ -1,0 +1,12 @@
+name: cpe:/o:ol:ge:9:0
+check_id: ol9_greater_equal_9_0
+bash_conditional: ''
+ansible_conditional: ansible_distribution == "OracleLinux" and ansible_distribution_version
+    is version("9.0", ">=")
+is_product_cpe: false
+versioned: false
+args: {}
+title: Operating System is OL and version is greater than or equal to 9.0
+definition_location: /root/scap-formula/build/content/shared/applicability/ol_greater_equal_9_0.yml
+template: null
+documentation_complete: true

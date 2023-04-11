@@ -1,0 +1,29 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service mdmonitor
+  block:
+  - name: Disable service mdmonitor
+    systemd:
+      name: "mdmonitor.service"
+      enabled: "no"
+      state: "stopped"
+      masked: "yes"
+    ignore_errors: 'yes'
+
+- name: "Unit Socket Exists - mdmonitor.socket"
+  command: systemctl list-unit-files mdmonitor.socket
+  register: socket_file_exists
+  changed_when: False
+  ignore_errors: True
+  check_mode: False
+
+- name: Disable socket mdmonitor
+  systemd:
+    name: "mdmonitor.socket"
+    enabled: "no"
+    state: "stopped"
+    masked: "yes"
+  when: '"mdmonitor.socket" in socket_file_exists.stdout_lines[1]'

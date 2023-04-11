@@ -1,0 +1,9 @@
+name: package_postfix
+original_expression: package[postfix]
+xml_content: <ns0:platform xmlns:ns0="http://cpe.mitre.org/language/2.0" id="package_postfix"><ns0:logical-test
+    operator="AND" negate="false"><ns0:fact-ref name="cpe:/a:postfix:" /></ns0:logical-test></ns0:platform>
+bash_conditional: rpm --quiet -q postfix
+ansible_conditional: '"postfix" in ansible_facts.packages'
+title: ''
+definition_location: /root/scap-formula/build/content/build/rhel7/platforms/package_postfix.yml
+documentation_complete: true

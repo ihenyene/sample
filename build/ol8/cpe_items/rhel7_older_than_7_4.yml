@@ -1,0 +1,11 @@
+name: cpe:/o:redhat:enterprise_linux:7:older_than_7_4
+check_id: rhel7_older_than_7_4
+bash_conditional: ''
+ansible_conditional: ''
+is_product_cpe: false
+versioned: false
+args: {}
+title: RHEL 7 is older than 7.4
+definition_location: /root/scap-formula/build/content/shared/applicability/rhel7_older_than_7_4.yml
+template: null
+documentation_complete: true

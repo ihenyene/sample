@@ -1,0 +1,12 @@
+name: cpe:/o:rhel:le:8:4
+check_id: rhel8_less_equal_8_4
+bash_conditional: ''
+ansible_conditional: ansible_distribution == "RedHat" and ansible_distribution_version
+    is version("8.4", "<=")
+is_product_cpe: false
+versioned: false
+args: {}
+title: Operating System is RHEL and version is less than or equal to 8.4
+definition_location: /root/scap-formula/build/content/shared/applicability/rhel_less_equal_8_4.yml
+template: null
+documentation_complete: true

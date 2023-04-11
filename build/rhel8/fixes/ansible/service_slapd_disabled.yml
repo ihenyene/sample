@@ -1,0 +1,58 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service slapd
+  block:
+
+  - name: Disable service slapd
+    systemd:
+      name: slapd.service
+      enabled: 'no'
+      state: stopped
+      masked: 'yes'
+    ignore_errors: 'yes'
+  when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+  tags:
+  - CCE-87262-2
+  - disable_strategy
+  - low_complexity
+  - low_disruption
+  - medium_severity
+  - no_reboot_needed
+  - service_slapd_disabled
+
+- name: Unit Socket Exists - slapd.socket
+  command: systemctl list-unit-files slapd.socket
+  register: socket_file_exists
+  changed_when: false
+  ignore_errors: true
+  check_mode: false
+  when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+  tags:
+  - CCE-87262-2
+  - disable_strategy
+  - low_complexity
+  - low_disruption
+  - medium_severity
+  - no_reboot_needed
+  - service_slapd_disabled
+
+- name: Disable socket slapd
+  systemd:
+    name: slapd.socket
+    enabled: 'no'
+    state: stopped
+    masked: 'yes'
+  when:
+  - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+  - '"slapd.socket" in socket_file_exists.stdout_lines[1]'
+  tags:
+  - CCE-87262-2
+  - disable_strategy
+  - low_complexity
+  - low_disruption
+  - medium_severity
+  - no_reboot_needed
+  - service_slapd_disabled

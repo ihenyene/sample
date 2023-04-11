@@ -1,0 +1,21 @@
+name: not_aarch64_arch_and_ol_greater_equal_9_0_or_aarch64_arch_and_rhel_greater_equal_9_0_or_rhel_less_equal_8_4_and_s390x_arch
+original_expression: not ((s390x_arch and rhel_less_equal_8_4) or (rhel_greater_equal_9_0
+    and aarch64_arch) or (ol_greater_equal_9_0 and aarch64_arch))
+xml_content: <ns0:platform xmlns:ns0="http://cpe.mitre.org/language/2.0" id="not_aarch64_arch_and_ol_greater_equal_9_0_or_aarch64_arch_and_rhel_greater_equal_9_0_or_rhel_less_equal_8_4_and_s390x_arch"><ns0:logical-test
+    operator="AND" negate="true"><ns0:logical-test operator="OR" negate="false"><ns0:logical-test
+    operator="AND" negate="false"><ns0:fact-ref name="cpe:/a:aarch64_arch" /><ns0:fact-ref
+    name="cpe:/o:ol:ge:9:0" /></ns0:logical-test><ns0:logical-test operator="AND"
+    negate="false"><ns0:fact-ref name="cpe:/a:aarch64_arch" /><ns0:fact-ref name="cpe:/o:rhel:ge:9:0"
+    /></ns0:logical-test><ns0:logical-test operator="AND" negate="false"><ns0:fact-ref
+    name="cpe:/o:rhel:le:8:4" /><ns0:fact-ref name="cpe:/a:s390x_arch" /></ns0:logical-test></ns0:logical-test></ns0:logical-test></ns0:platform>
+bash_conditional: '! ( ( ( grep -q aarch64 /proc/sys/kernel/osrelease ) || ( grep
+    -q aarch64 /proc/sys/kernel/osrelease ) || ( grep -q s390x /proc/sys/kernel/osrelease
+    ) ) )'
+ansible_conditional: not ( ( ( ansible_architecture == "aarch64" and ansible_distribution
+    == "OracleLinux" and ansible_distribution_version is version("9.0", ">=") ) or
+    ( ansible_architecture == "aarch64" and ansible_distribution == "RedHat" and ansible_distribution_version
+    is version("9.0", ">=") ) or ( ansible_distribution == "RedHat" and ansible_distribution_version
+    is version("8.4", "<=") and ansible_architecture == "s390x" ) ) )
+title: ''
+definition_location: /root/scap-formula/build/content/build/rhel7/platforms/not_aarch64_arch_and_ol_greater_equal_9_0_or_aarch64_arch_and_rhel_greater_equal_9_0_or_rhel_less_equal_8_4_and_s390x_arch.yml
+documentation_complete: true

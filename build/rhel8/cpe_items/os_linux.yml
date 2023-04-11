@@ -1,0 +1,20 @@
+name: cpe:/o:{arg}
+check_id: platform_os_linux_{arg}
+bash_conditional: ''
+ansible_conditional: ''
+is_product_cpe: false
+versioned: false
+args:
+    rhel:
+        os_name: Red Hat Enterprise Linux
+        os_id: rhel
+        os_id_ansible: RedHat
+    fedora:
+        os_name: Fedora
+        os_id: fedora
+        os_id_ansible: Fedora
+title: Operating System is {arg}
+definition_location: /root/scap-formula/build/content/shared/applicability/os_linux.yml
+template:
+    name: platform_os_linux
+documentation_complete: true

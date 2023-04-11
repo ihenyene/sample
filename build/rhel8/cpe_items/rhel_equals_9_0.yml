@@ -1,0 +1,11 @@
+name: cpe:/o:rhel:eq:9:0
+check_id: rhel9_equals_9_0
+bash_conditional: ''
+ansible_conditional: ''
+is_product_cpe: false
+versioned: false
+args: {}
+title: Operating System is RHEL and version equals 9.0
+definition_location: /root/scap-formula/build/content/shared/applicability/rhel_equals_9_0.yml
+template: null
+documentation_complete: true

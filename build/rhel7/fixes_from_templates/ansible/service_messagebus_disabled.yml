@@ -1,0 +1,29 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service messagebus
+  block:
+  - name: Disable service messagebus
+    systemd:
+      name: "messagebus.service"
+      enabled: "no"
+      state: "stopped"
+      masked: "yes"
+    ignore_errors: 'yes'
+
+- name: "Unit Socket Exists - messagebus.socket"
+  command: systemctl list-unit-files messagebus.socket
+  register: socket_file_exists
+  changed_when: False
+  ignore_errors: True
+  check_mode: False
+
+- name: Disable socket messagebus
+  systemd:
+    name: "messagebus.socket"
+    enabled: "no"
+    state: "stopped"
+    masked: "yes"
+  when: '"messagebus.socket" in socket_file_exists.stdout_lines[1]'

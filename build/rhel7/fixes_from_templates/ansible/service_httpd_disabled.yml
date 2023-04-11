@@ -1,0 +1,29 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service httpd
+  block:
+  - name: Disable service httpd
+    systemd:
+      name: "httpd.service"
+      enabled: "no"
+      state: "stopped"
+      masked: "yes"
+    ignore_errors: 'yes'
+
+- name: "Unit Socket Exists - httpd.socket"
+  command: systemctl list-unit-files httpd.socket
+  register: socket_file_exists
+  changed_when: False
+  ignore_errors: True
+  check_mode: False
+
+- name: Disable socket httpd
+  systemd:
+    name: "httpd.socket"
+    enabled: "no"
+    state: "stopped"
+    masked: "yes"
+  when: '"httpd.socket" in socket_file_exists.stdout_lines[1]'

@@ -1,0 +1,9 @@
+name: no_ovirt
+original_expression: no_ovirt
+xml_content: <ns0:platform xmlns:ns0="http://cpe.mitre.org/language/2.0" id="no_ovirt"><ns0:logical-test
+    operator="AND" negate="false"><ns0:fact-ref name="cpe:/a:no_ovirt" /></ns0:logical-test></ns0:platform>
+bash_conditional: ''
+ansible_conditional: ''
+title: ''
+definition_location: /root/scap-formula/build/content/build/rhel8/platforms/no_ovirt.yml
+documentation_complete: true
